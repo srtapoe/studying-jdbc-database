@@ -1,6 +1,10 @@
 package br.com.jdbc.studies.domain.client;
 
+import br.com.caelum.stella.validation.CPFValidator;
+import br.com.caelum.stella.validation.InvalidStateException;
+
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 public class Client {
 
@@ -45,5 +49,22 @@ public class Client {
                 "NAME: '" + name + '\'' +
                 ",CPF:'" + cpf + '\'' +
                 ", EMAIL: '" + email;
+    }
+
+    public static boolean isValidCPF(String cpf) {
+        CPFValidator validator = new CPFValidator();
+
+        try {
+            validator.assertValid(cpf);
+            return true;
+        } catch (InvalidStateException e) {
+            return false;
+        }
+    }
+
+    public static boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
     }
 }

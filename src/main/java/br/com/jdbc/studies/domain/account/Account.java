@@ -11,11 +11,13 @@ public class Account {
     private int number;
     private BigDecimal balance;
     private Client client;
+    private boolean isActive;
 
-    public Account(int number, Client client) {
+    public Account(int number, BigDecimal balance, Client client) {
         this.number = number;
-        this.balance = BigDecimal.ZERO;
+        this.balance = balance;
         this.client = client;
+        this.isActive = true;
     }
 
     public int getNumber() {
@@ -58,7 +60,8 @@ public class Account {
         return "Account : " +
                 "NUMBER: " + number +
                 ", BALANCE: " + balance +
-                ", CLIENT: " + client;
+                ", CLIENT: " + client +
+                ", STATUS: " + isActive;
     }
 
 
